@@ -55,7 +55,15 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
 const isInteractive = process.stdout.isTTY;
 
 // Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appPopupHtml, paths.appIndexJs])) {
+if (
+  !checkRequiredFiles([
+    paths.appPopupHtml,
+    paths.manifestJson,
+    paths.appIndexJs,
+    paths.appBackgroundJs,
+    paths.appContentScriptJs,
+  ])
+) {
   process.exit(1);
 }
 
