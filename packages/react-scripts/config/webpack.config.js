@@ -15,9 +15,8 @@ const webpack = require('webpack');
 const resolve = require('resolve');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtensionReloader = require('webpack-extension-reloader');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -41,9 +40,6 @@ const postcssNormalize = require('postcss-normalize');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
-// Some apps do not need the benefits of saving a web request, so not inlining the chunk
-// makes for a smoother build process.
-const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
 
 // Check if TypeScript is setup
 const useTypeScript = fs.existsSync(paths.appTsConfig);
@@ -140,9 +136,19 @@ module.exports = function(webpackEnv) {
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: {
-      app: paths.appIndexJs,
-      background: paths.appBackgroundJs,
-      'content-script': paths.appContentScriptJs,
+      app: [
+        isEnvDevelopment &&
+          require.resolve('webpack-dev-server/client') +
+            '?http://localhost:4000',
+        paths.appIndexJs,
+      ].filter(Boolean),
+      background: [
+        isEnvDevelopment &&
+          require.resolve('webpack-dev-server/client') +
+            '?http://localhost:4000',
+        paths.appBackgroundJs,
+      ].filter(Boolean),
+      contentScript: paths.appContentScriptJs,
     },
     output: {
       // The build folder.
@@ -153,7 +159,7 @@ module.exports = function(webpackEnv) {
       // No need to hash because extension updates are managed by the browser distributer
       filename: '[name].bundle.js',
       // TODO: remove this when upgrading to webpack 5
-      futureEmitAssets: true,
+      futureEmitAssets: false,
       publicPath: '',
       // Point sourcemap entries to original disk location (format as URL on Windows)
       devtoolModuleFilenameTemplate: isEnvProduction
@@ -358,7 +364,6 @@ module.exports = function(webpackEnv) {
                       },
                     },
                   ],
-                  'react-hot-loader/babel',
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -493,7 +498,6 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
-      new ExtensionReloader(),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
@@ -522,11 +526,6 @@ module.exports = function(webpackEnv) {
             : undefined
         )
       ),
-      // Inlines the webpack runtime script. This script is too small to warrant
-      // a network request.
-      isEnvProduction &&
-        shouldInlineRuntimeChunk &&
-        new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime~.+[.]js/]),
       // Makes some environment variables available in index.html.
       // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
       // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
@@ -627,6 +626,9 @@ module.exports = function(webpackEnv) {
           // The formatter is invoked directly in WebpackDevServerUtils during development
           formatter: isEnvProduction ? typescriptFormatter : undefined,
         }),
+      // Forces webpack dev server to write to the file system so we can serve it for hot reloading
+      // the extension. This plugin is only in effect with "webpack-dev-server", otherwise it lets webpack do the writing
+      new WriteFilePlugin(),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
