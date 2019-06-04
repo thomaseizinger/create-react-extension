@@ -142,7 +142,7 @@ module.exports = function(webpackEnv) {
     entry: {
       app: paths.appIndexJs,
       background: paths.appBackgroundJs,
-      contentScript: paths.appContentScriptJs,
+      'content-script': paths.appContentScriptJs,
     },
     output: {
       // The build folder.
@@ -358,6 +358,7 @@ module.exports = function(webpackEnv) {
                       },
                     },
                   ],
+                  'react-hot-loader/babel',
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -492,12 +493,7 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
-      new ExtensionReloader({
-        entries: {
-          contentScript: ['app', 'contentScript'],
-          background: 'background',
-        },
-      }),
+      new ExtensionReloader(),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
