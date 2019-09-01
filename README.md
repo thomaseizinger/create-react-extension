@@ -51,7 +51,7 @@ There are [different types of chrome extensions](https://developer.chrome.com/ex
 
 These are all controlled by the all important [`/public/manifest.json`](https://github.com/VasilyShelkov/create-react-extension/blob/master/packages/react-scripts/template/public/manifest.json) which is [configurable](https://developer.chrome.com/extensions/manifest) by you to control what kind of extension you want build.
 
-**Do not delete any of the entry files, this is a convention to remind you what your extensions could be**
+**Do not delete any of the entry files, this is a convention to remind you what your extensions could be. The build will notify you and fail if you remove any of these important files.**
 
 ## Creating a Browser Extension
 
