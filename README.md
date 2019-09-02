@@ -10,9 +10,9 @@ This is a fork of [create-react-app](https://github.com/facebook/create-react-ap
 - [x] [Same CRA Developer Experience](https://github.com/facebook/create-react-app#whats-included) for your browser extension projects (~~service worker functionality~~)
 - [x] [Webpack dev server](https://github.com/webpack/webpack-dev-server) hot reloads extension on changes (NOTE: contentScript hot reloading not supported)
 - [x] [Supports any combination of background, content and popup chrome extensions](#only-1-new-convention)
+- [x] [Automated fork watcher](https://github.com/wei/pull) to stay updated with the original CRA
 - [ ] Add support for [automated deployments](https://github.com/LinusU/wext-shipit) and docs to help users with what to do after having built their extension.
 - [ ] Add e2e test suite similar to the [original CRA](https://github.com/facebook/create-react-app/tree/master/test) and run with automated pipeline.
-- [ ] Add [automated fork watcher](https://github.com/wei/pull) to stay updated with the original CRA
 - [ ] Add some kind of dependency watcher (e.g. [greenkeeper](https://greenkeeper.io/)) to stay up to date with the dependencies that are not managed by CRA
 
 see [Create a browser extension](#creating-a-browser-extension) for a more in depth start guide
