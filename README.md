@@ -48,7 +48,8 @@ There are [different types of chrome extensions](https://developer.chrome.com/ex
 - [Popup UI](https://developer.chrome.com/extensions/user_interface#popup) which renders your `index.js` when you click on your extension in the browser extension icon.
 - [Background script](https://developer.chrome.com/extensions/background_pages) which will run in the background from `/background/index.js` and can be use for things like [state-management](https://github.com/tshaddix/webext-redux).
 - [Content script](https://developer.chrome.com/extensions/content_scripts) from `/contentScript/index.js` which will run on configured web pages
-- [Options UI](https://developer.chrome.com/extensions/options) :cross: Does not support yet
+- [Options UI](https://developer.chrome.com/extensions/options) :negative_squared_cross_mark: Does not support yet
+- [Dev tools page](https://developer.chrome.com/extensions/devtools) :negative_squared_cross_mark: Does not support yet
 
 These are all controlled by the all important [`/public/manifest.json`](https://github.com/VasilyShelkov/create-react-extension/blob/master/packages/react-scripts/template/public/manifest.json) which is [configurable](https://developer.chrome.com/extensions/manifest) by you to control what kind of extension you want build.
 
