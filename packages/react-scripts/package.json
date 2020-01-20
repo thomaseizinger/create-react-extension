@@ -1,6 +1,6 @@
 {
   "name": "react-browser-extension-scripts",
-  "version": "0.1.2",
+  "version": "3.3.0",
   "description": "Configuration and scripts for Create React Browser Extension",
   "repository": {
     "type": "git",

@@ -66,7 +66,7 @@ To create a new Browser Extension, you may choose one of the following methods:
 ### npx
 
 ```sh
-npx create-react-app my-browser-extension --scripts-version react-browser-extension-scripts
+npx create-react-app my-browser-extension --scripts-version react-browser-extension-scripts --template browser-extension
 ```
 
 _([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) is a package runner tool that comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))_
@@ -74,7 +74,7 @@ _([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7
 ### npm
 
 ```sh
-npm init react-app my-browser-extension --scripts-version react-browser-extension-scripts
+npm init react-app my-browser-extension --scripts-version react-browser-extension-scripts --template browser-extension
 ```
 
 _`npm init <initializer>` is available in npm 6+_
@@ -82,7 +82,7 @@ _`npm init <initializer>` is available in npm 6+_
 ### Yarn
 
 ```sh
-yarn create react-app my-browser-extension --scripts-version react-browser-extension-scripts
+yarn create react-app my-browser-extension --scripts-version react-browser-extension-scripts --template browser-extension
 ```
 
 _[`yarn create <starter-kit-package>`](https://yarnpkg.com/lang/en/docs/cli/create/) is available in Yarn 0.25+_
@@ -116,7 +116,7 @@ my-browser-extension
     ├── logo.svg
 ```
 
-No configuration or complicated folder structures, just the files you need to build your extension.<br>
+No configuration or complicated folder structures, only the files you need to build your extension.<br>
 Once the installation is done, you can open your project folder:
 
 ```sh
