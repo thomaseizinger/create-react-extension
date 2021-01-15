@@ -1,4 +1,4 @@
-# Contributing to Create React App
+# Contributing to Create React Extension
 
 Loving Create React App and want to get involved? Thanks! There are plenty of ways you can help.
 
@@ -8,7 +8,7 @@ Following these guidelines helps to communicate that you respect the time of the
 
 ## Core Ideas
 
-As much as possible, we try to avoid adding configuration and flags. The purpose of this tool is to provide the best experience for people getting started with React, and this will always be our first priority. This means that sometimes we [sacrifice additional functionality](https://gettingreal.37signals.com/ch05_Half_Not_Half_Assed.php) (such as server rendering) because it is too hard to solve it in a way that wouldn’t require any configuration.
+As much as possible, we try to avoid adding configuration and flags. The purpose of this tool is to provide the best experience for people getting started with React, and this will always be our first priority. This means that sometimes we [sacrifice additional functionality](https://gettingreal.37signals.com/ch05_Half_Not_Half_Assed.php)
 
 We prefer **convention, heuristics, or interactivity** over configuration.<br>
 Here are a few examples of them in action.
@@ -41,47 +41,37 @@ No rules are perfect. Sometimes we may introduce flags or configuration if we be
 
 Good pull requests, such as patches, improvements, and new features, are a fantastic help. They should remain focused in scope and avoid containing unrelated commits.
 
-Please **ask first** if somebody else is already working on this or the core developers think your feature is in-scope for Create React App. Generally always have a related issue with discussions for whatever you are including.
+Please **ask first** if somebody else is already working on this or the core developers think your feature is in-scope for Create React Extension. Generally always have a related issue with discussions for whatever you are including.
 
-Please also provide a **test plan**, i.e. specify how you verified that your addition works.
+~~Please also provide a **test plan**, i.e. specify how you verified that your addition works.~~ currently no tests sadly
 
-## Folder Structure of Create React App
+## Folder Structure of Create React Extension
 
-`create-react-app` is a monorepo, meaning it is divided into independent sub-packages.<br>
-These packages can be found in the [`packages/`](https://github.com/facebook/create-react-app/tree/master/packages) directory.
+`create-react-extension` is a monorepo, meaning it is divided into independent sub-packages.<br>
+The only package that can be changed as part of this fork is `react-scripts`, all other packages are completely reliant on [CRA's original packages](https://github.com/VasilyShelkov/create-react-extension/tree/master/packages) and have not been removed to more easily maintain this fork.
+
+These packages can be found in the [`packages/`](https://github.com/VasilyShelkov/create-react-extension/tree/master/packages) directory.
 
 ### Overview of directory structure
 
 ```
 packages/
-  babel-preset-react-app/
-  create-react-app/
-  eslint-config-react-app/
-  react-dev-utils/
+  ~~babel-preset-react-app/~~
+  ~~create-react-app/~~
+  ~~eslint-config-react-app/~~
+  ~~react-dev-utils/~~
   react-scripts/
 ```
 
 ### Package Descriptions
 
-#### [babel-preset-react-app](https://github.com/facebook/create-react-app/tree/master/packages/babel-preset-react-app)
+#### ~~[babel-preset-react-app](https://github.com/facebook/create-react-app/blob/master/CONTRIBUTING.md#babel-preset-react-app)~~
 
-This package is a babel preset intended to be used with `react-scripts`.<br>
-It targets platforms that React is designed to support (IE 11+) and enables experimental features used heavily at Facebook.<br>
-This package is enabled by default for all `create-react-app` scaffolded applications.
+#### ~~[create-react-app](https://github.com/facebook/create-react-app/tree/master/packages/babel-preset-react-app)~~
 
-#### [create-react-app](https://github.com/facebook/create-react-app/tree/master/packages/create-react-app)
+#### ~~[eslint-config-react-app](https://github.com/facebook/create-react-app/tree/master/packages/eslint-config-react-app)~~
 
-The global CLI command code can be found in this directory, and shouldn't often be changed. It should run on Node 0.10+.
-
-#### [eslint-config-react-app](https://github.com/facebook/create-react-app/tree/master/packages/eslint-config-react-app)
-
-This package contains a conservative set of rules focused on making errors apparent and enforces no style rules.<br>
-This package is enabled by default for all `create-react-app` scaffolded applications.
-
-#### [react-dev-utils](https://github.com/facebook/create-react-app/tree/master/packages/react-dev-utils)
-
-This package contains utilities used for `react-scripts` and sibling packages.<br>
-Its main purpose is to conceal code which the user shouldn't be burdened with upon ejecting.
+#### ~~[react-dev-utils](https://github.com/facebook/create-react-app/tree/master/packages/react-dev-utils)~~
 
 #### [react-scripts](https://github.com/facebook/create-react-app/tree/master/packages/react-scripts)
 
@@ -90,20 +80,22 @@ All functionality must be retained (and configuration given to the user) if they
 
 ## Setting Up a Local Copy
 
-1. Clone the repo with `git clone https://github.com/facebook/create-react-app`
+1. Clone the repo with `git clone https://github.com/VasilyShelkov/create-react-extension`
 
 2. Run `yarn` in the root `create-react-app` folder.
 
-Once it is done, you can modify any file locally and run `yarn start`, `yarn test` or `yarn build` like you can in a generated project. It will serve the application from the files located in `packages/cra-template/template`.
+Once it is done, you can modify any file locally and run `yarn start`, `yarn test` or `yarn build` like you can in a generated project.
 
 If you want to try out the end-to-end flow with the global CLI, you can do this too:
 
 ```sh
-yarn create-react-app my-app
+yarn create-react-app my-app --template "file:./packages/cra-template"
 cd my-app
 ```
 
 and then run `yarn start` or `yarn build`.
+
+# WARNING: Everything below here has not been setup or tried out yet
 
 ## Contributing to E2E (end to end) tests
 

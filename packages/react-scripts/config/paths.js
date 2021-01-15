@@ -10,24 +10,11 @@
 
 const path = require('path');
 const fs = require('fs');
-const getPublicUrlOrPath = require('react-dev-utils/getPublicUrlOrPath');
 
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
-
-// We use `PUBLIC_URL` environment variable or "homepage" field to infer
-// "public path" at which the app is served.
-// webpack needs to know it to put the right <script> hrefs into HTML even in
-// single-page apps that may serve index.html for nested URLs like /todos/42.
-// We can't use a relative path in HTML because we don't want to load something
-// like /todos/42/static/js/bundle.7289d.js. We have to know the root.
-const publicUrlOrPath = getPublicUrlOrPath(
-  process.env.NODE_ENV === 'development',
-  require(resolveApp('package.json')).homepage,
-  process.env.PUBLIC_URL
-);
 
 const moduleFileExtensions = [
   'web.mjs',
@@ -61,19 +48,20 @@ module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
   appBuild: resolveApp('build'),
+  devAppBuild: resolveApp('dev'),
   appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/index.html'),
+  manifestJson: resolveApp('public/manifest.json'),
+  appPopupHtml: resolveApp('public/popup.html'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
+  appBackgroundJs: resolveModule(resolveApp, 'src/background/index'),
+  appContentScriptJs: resolveModule(resolveApp, 'src/contentScript/index'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),
   appJsConfig: resolveApp('jsconfig.json'),
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
-  proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
-  swSrc: resolveModule(resolveApp, 'src/service-worker'),
-  publicUrlOrPath,
 };
 
 // @remove-on-eject-begin
@@ -84,19 +72,20 @@ module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
   appBuild: resolveApp('build'),
+  devAppBuild: resolveApp('dev'),
   appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/index.html'),
+  manifestJson: resolveApp('public/manifest.json'),
+  appPopupHtml: resolveApp('public/popup.html'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
+  appBackgroundJs: resolveModule(resolveApp, 'src/background/index'),
+  appContentScriptJs: resolveModule(resolveApp, 'src/contentScript/index'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),
   appJsConfig: resolveApp('jsconfig.json'),
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
-  proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
-  swSrc: resolveModule(resolveApp, 'src/service-worker'),
-  publicUrlOrPath,
   // These properties only exist before ejecting:
   ownPath: resolveOwn('.'),
   ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
@@ -120,19 +109,26 @@ if (
     dotenv: resolveOwn(`${templatePath}/.env`),
     appPath: resolveApp('.'),
     appBuild: resolveOwn('../../build'),
+    devAppBuild: resolveApp('../../dev'),
     appPublic: resolveOwn(`${templatePath}/public`),
-    appHtml: resolveOwn(`${templatePath}/public/index.html`),
+    manifestJson: resolveApp(`${templatePath}/public/manifest.json`),
+    appPopupHtml: resolveOwn(`${templatePath}/public/popup.html`),
     appIndexJs: resolveModule(resolveOwn, `${templatePath}/src/index`),
+    appBackgroundJs: resolveModule(
+      resolveOwn,
+      `${templatePath}/src/background/index`
+    ),
+    appContentScriptJs: resolveModule(
+      resolveOwn,
+      `${templatePath}/src/contentScript/index`
+    ),
     appPackageJson: resolveOwn('package.json'),
     appSrc: resolveOwn(`${templatePath}/src`),
     appTsConfig: resolveOwn(`${templatePath}/tsconfig.json`),
     appJsConfig: resolveOwn(`${templatePath}/jsconfig.json`),
     yarnLockFile: resolveOwn(`${templatePath}/yarn.lock`),
     testsSetup: resolveModule(resolveOwn, `${templatePath}/src/setupTests`),
-    proxySetup: resolveOwn(`${templatePath}/src/setupProxy.js`),
     appNodeModules: resolveOwn('node_modules'),
-    swSrc: resolveModule(resolveOwn, `${templatePath}/src/service-worker`),
-    publicUrlOrPath,
     // These properties only exist before ejecting:
     ownPath: resolveOwn('.'),
     ownNodeModules: resolveOwn('node_modules'),

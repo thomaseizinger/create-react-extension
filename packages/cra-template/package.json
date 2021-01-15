@@ -1,15 +1,16 @@
 {
-  "name": "cra-template",
-  "version": "1.1.1",
+  "name": "cra-template-browser-extension",
+  "version": "1.0.0",
   "keywords": [
     "react",
-    "create-react-app",
+    "create-react-extension",
     "template"
   ],
-  "description": "The base template for Create React App.",
+  "description": "The base template for Create React Browser Extension.",
+  "main": "template.json",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/create-react-app.git",
+    "url": "https://github.com/VasilyShelkov/create-react-extension",
     "directory": "packages/cra-template"
   },
   "license": "MIT",
@@ -17,7 +18,7 @@
     "node": ">=10"
   },
   "bugs": {
-    "url": "https://github.com/facebook/create-react-app/issues"
+    "url": "https://github.com/VasilyShelkov/create-react-extension/issues"
   },
   "files": [
     "template",

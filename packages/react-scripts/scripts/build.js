@@ -56,7 +56,15 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
 const isInteractive = process.stdout.isTTY;
 
 // Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
+if (
+  !checkRequiredFiles([
+    paths.appPopupHtml,
+    paths.manifestJson,
+    paths.appIndexJs,
+    paths.appBackgroundJs,
+    paths.appContentScriptJs,
+  ])
+) {
   process.exit(1);
 }
 
@@ -80,7 +88,8 @@ checkBrowsers(paths.appPath, isInteractive)
     // if you're in it, you don't end up in Trash
     fs.emptyDirSync(paths.appBuild);
     // Merge with the public folder
-    copyPublicFolder();
+    const copyPublicFolder = require('./utils/copyPublicFolder');
+    copyPublicFolder(paths.appBuild);
     // Start the webpack build
     return build(previousFileSizes);
   })
@@ -114,12 +123,11 @@ checkBrowsers(paths.appPath, isInteractive)
       console.log();
 
       const appPackage = require(paths.appPackageJson);
-      const publicUrl = paths.publicUrlOrPath;
       const publicPath = config.output.publicPath;
       const buildFolder = path.relative(process.cwd(), paths.appBuild);
       printHostingInstructions(
         appPackage,
-        publicUrl,
+        '',
         publicPath,
         buildFolder,
         useYarn
