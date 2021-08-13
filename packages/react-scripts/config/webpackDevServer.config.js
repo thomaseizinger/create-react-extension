@@ -22,9 +22,6 @@ const sockPort = process.env.WDS_SOCKET_PORT;
 
 module.exports = function () {
   return {
-    // We have to disableHostChecking because the host is a custom extension
-    // host that will always fail
-    disableHostCheck: true,
     // Enable gzip compression of generated files.
     compress: true,
     static: {
