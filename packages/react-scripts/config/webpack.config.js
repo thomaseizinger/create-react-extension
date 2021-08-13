@@ -766,11 +766,7 @@ module.exports = function (webpackEnv) {
               }),
             },
           },
-      }),
-      // Forces webpack dev server to write to the file system so we can serve it for hot reloading
-      // the extension. This plugin is only in effect with "webpack-dev-server", otherwise it lets webpack do the writing
-      new WriteFilePlugin(),
-
+      })
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter

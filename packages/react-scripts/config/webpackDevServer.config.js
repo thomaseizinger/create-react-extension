@@ -70,6 +70,7 @@ module.exports = function () {
       // from the root.
       // remove last slash so user can land on `/test` instead of `/test/`
       publicPath: '',
+      writeToDisk: true
     },
     https: false,
     host,
