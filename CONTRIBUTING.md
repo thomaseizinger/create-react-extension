@@ -73,7 +73,7 @@ packages/
 
 #### ~~[react-dev-utils](https://github.com/facebook/create-react-app/tree/master/packages/react-dev-utils)~~
 
-#### [react-scripts](https://github.com/facebook/create-react-app/tree/master/packages/react-scripts)
+#### [react-scripts](https://github.com/facebook/create-react-app/tree/main/packages/react-scripts)
 
 This package is the heart of the project, which contains the scripts for setting up the development server, building production builds, configuring all software used, etc.<br>
 All functionality must be retained (and configuration given to the user) if they choose to eject.
@@ -155,7 +155,7 @@ Make sure to test the released version! If you want to be extra careful, you can
 1. Go to the `docusaurus/website` directory
 2. Run `yarn build`
 3. You'll need an [access token for the GitHub API](https://help.github.com/articles/creating-an-access-token-for-command-line-use/). Save it to this environment variable: `export GITHUB_AUTH="..."`
-4. Run `GIT_USER=<GITHUB_USERNAME> CURRENT_BRANCH=master USE_SSH=true yarn deploy`
+4. Run `GIT_USER=<GITHUB_USERNAME> CURRENT_BRANCH=main USE_SSH=true yarn deploy`
 
 ---
 

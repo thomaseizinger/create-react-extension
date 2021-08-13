@@ -15,6 +15,7 @@
     "screencast": "node ./tasks/screencast.js",
     "screencast:error": "svg-term --cast jyu19xGl88FQ3poMY8Hbmfw8y --out screencast-error.svg --window --at 12000 --no-cursor",
     "alex": "alex .",
+    "test:integration": "jest test/integration",
     "test": "cd packages/react-scripts && node bin/react-scripts.js test",
     "format": "prettier --write 'packages/*/*.js' 'packages/*/!(node_modules)/**/*.js'",
     "compile:lockfile": "node tasks/compile-lockfile.js"
@@ -24,7 +25,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "alex": "^8.2.0",
-    "eslint": "^7.11.0",
+    "eslint": "^7.30.0",
     "execa": "1.0.0",
     "fs-extra": "^9.0.1",
     "get-port": "^5.1.1",

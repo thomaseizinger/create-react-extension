@@ -16,6 +16,9 @@ const fs = require('fs');
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
+const buildPath = process.env.BUILD_PATH || 'build';
+const devBuildPath = process.env.DEV_BUILD_PATH || 'dev';
+
 const moduleFileExtensions = [
   'web.mjs',
   'mjs',
@@ -47,8 +50,8 @@ const resolveModule = (resolveFn, filePath) => {
 module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
-  appBuild: resolveApp('build'),
-  devAppBuild: resolveApp('dev'),
+  appBuild: resolveApp(buildPath),
+  devAppBuild: resolveApp(devBuildPath),
   appPublic: resolveApp('public'),
   manifestJson: resolveApp('public/manifest.json'),
   appOptionsHtml: resolveApp('public/options.html'),
@@ -64,6 +67,8 @@ module.exports = {
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
   appNodeModules: resolveApp('node_modules'),
+  appWebpackCache: resolveApp('node_modules/.cache'),
+  appTsBuildInfoFile: resolveApp('node_modules/.cache/tsconfig.tsbuildinfo'),
 };
 
 // @remove-on-eject-begin
@@ -73,8 +78,8 @@ const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
 module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
-  appBuild: resolveApp('build'),
-  devAppBuild: resolveApp('dev'),
+  appBuild: resolveApp(buildPath),
+  devAppBuild: resolveApp(devBuildPath),
   appPublic: resolveApp('public'),
   manifestJson: resolveApp('public/manifest.json'),
   appOptionsHtml: resolveApp('public/options.html'),
@@ -90,6 +95,8 @@ module.exports = {
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
   appNodeModules: resolveApp('node_modules'),
+  appWebpackCache: resolveApp('node_modules/.cache'),
+  appTsBuildInfoFile: resolveApp('node_modules/.cache/tsconfig.tsbuildinfo'),
   // These properties only exist before ejecting:
   ownPath: resolveOwn('.'),
   ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
@@ -112,8 +119,8 @@ if (
   module.exports = {
     dotenv: resolveOwn(`${templatePath}/.env`),
     appPath: resolveApp('.'),
-    appBuild: resolveOwn('../../build'),
-    devAppBuild: resolveApp('../../dev'),
+    appBuild: resolveOwn(path.join('../..', buildPath)),
+    devAppBuild: resolveApp(path.join('../..', devBuildPath)),
     appPublic: resolveOwn(`${templatePath}/public`),
     manifestJson: resolveApp(`${templatePath}/public/manifest.json`),
     appPopupHtml: resolveOwn(`${templatePath}/public/popup.html`),
@@ -138,6 +145,8 @@ if (
     yarnLockFile: resolveOwn(`${templatePath}/yarn.lock`),
     testsSetup: resolveModule(resolveOwn, `${templatePath}/src/setupTests`),
     appNodeModules: resolveOwn('node_modules'),
+    appWebpackCache: resolveOwn('node_modules/.cache'),
+    appTsBuildInfoFile: resolveOwn('node_modules/.cache/tsconfig.tsbuildinfo'),
     // These properties only exist before ejecting:
     ownPath: resolveOwn('.'),
     ownNodeModules: resolveOwn('node_modules'),
